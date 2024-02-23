@@ -1,11 +1,6 @@
 FROM node:20-alpine
 
-# Used while building the dockerfile
-ARG ARTIFACTORY_USER
-ARG ARTIFACTORY_NPM_PASSWORD
-
 ENV NPM_CONFIG_LOGLEVEL=warn \
-  TZ="Europe/Oslo" \
   APP_PATH=/src \
 
 RUN mkdir -p $APP_PATH
