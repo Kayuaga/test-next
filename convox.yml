@@ -1,0 +1,15 @@
+environment:
+  - '*'
+services:
+  app:
+    build: .
+    command: npm start
+    sticky: false
+    port: 3000
+    health: /
+    scale:
+      count: 2-3
+      cpu: 512
+      memory: 1024
+      targets:
+        cpu: 70

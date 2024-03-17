@@ -1,7 +1,7 @@
 FROM node:20-alpine
 
 ENV NPM_CONFIG_LOGLEVEL=warn \
-  APP_PATH=/src \
+  APP_PATH=/src
 
 RUN mkdir -p $APP_PATH
 WORKDIR $APP_PATH
@@ -13,12 +13,13 @@ RUN apk --no-cache add --virtual native-deps git \
 RUN chown node:node $APP_PATH
 USER node
 
-COPY package.json package-lock.json .npmrc $APP_PATH/
+COPY package.json package-lock.json $APP_PATH/
 
-RUN node -v && npm -v && npm ci --only=production
+RUN node -v && npm -v && npm ci
 
 COPY --chown=node:node . $APP_PATH
 
+RUN npm run build
 # Run app
 EXPOSE 3000
-CMD PORT=3000 npm start
+CMD PORT=3000 npm run start
